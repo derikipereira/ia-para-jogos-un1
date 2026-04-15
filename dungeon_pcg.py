@@ -565,6 +565,7 @@ def render_map(
     sprites: Dict[str, Image.Image],
     path_overlay: Optional[List[Vec2]] = None,
     scale: int = 4,
+    hero_at: Optional[Vec2] = None,
 ) -> Image.Image:
     tw = dm.width * TILE
     th = dm.height * TILE
@@ -608,7 +609,7 @@ def render_map(
                 overlay = Image.new("RGBA", (TILE, TILE), (80, 200, 255, 90))
                 base.alpha_composite(overlay, (px, py))
 
-    hx, hy = dm.start
+    hx, hy = hero_at if hero_at is not None else dm.start
     hero = sprites["hero"]
     base.paste(hero, (hx * TILE, hy * TILE), hero)
 
